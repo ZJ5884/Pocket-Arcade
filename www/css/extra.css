@@ -1,0 +1,174 @@
+/* ================= v4 additions: layouts, views, themes of the shell, app feel ================= */
+button,input{font-family:inherit}
+html{-webkit-touch-callout:none}
+body{-webkit-font-smoothing:antialiased}
+
+/* ---------- splash ---------- */
+#splash{position:fixed;inset:0;z-index:50;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;transition:opacity .45s ease,transform .45s ease}
+#splash svg{width:5rem;height:5rem;animation:pop .6s cubic-bezier(.2,1.4,.4,1)}
+#splash b{font-size:1.3rem;font-weight:900;letter-spacing:-.02em}
+#splash.out{opacity:0;transform:scale(1.04);pointer-events:none}
+@keyframes pop{from{transform:scale(.5);opacity:0}to{transform:none;opacity:1}}
+
+/* ---------- page transition and press feedback ---------- */
+#content.pg{animation:pgin .2s ease-out}
+@keyframes pgin{from{opacity:0;transform:translateY(.5rem)}to{opacity:1;transform:none}}
+.card:active .poster,.card:active.lrow,.card:active.tile{transform:scale(.97)}
+.nav-i:active,.tabbtn:active,.btn:active,.row:active{transform:scale(.98)}
+.nav-i,.tabbtn,.btn,.row,.lrow,.tile{transition:transform .08s,background .12s,filter .12s}
+
+/* ---------- sidebar extras ---------- */
+.nav-sec{font-size:.68rem;font-weight:800;color:var(--dim);letter-spacing:.04em;padding:.9rem .75rem .25rem;opacity:.8}
+#navList{display:contents}
+#meTop{display:none;width:2.5rem;height:2.5rem;border-radius:50%;border:0;background:var(--accent);font-size:1.25rem;place-items:center;flex:none}
+
+/* ---------- menu position: sidebar (default), rail, bottom bar ---------- */
+[data-navx=rail] #home{grid-template-columns:4.6rem minmax(0,1fr)}
+[data-navx=rail] #side{padding:.8rem .5rem;align-items:center}
+[data-navx=rail] .brand{padding:.2rem 0 .6rem;justify-content:center}
+[data-navx=rail] .brand b,[data-navx=rail] .nav-i span,[data-navx=rail] .nav-i kbd,[data-navx=rail] #badge,[data-navx=rail] #me>span:last-child,[data-navx=rail] .nav-sec{display:none}
+[data-navx=rail] .nav-sec{display:block;height:1px;background:var(--line);margin:.5rem .6rem;padding:0;font-size:0;width:2rem}
+[data-navx=rail] .nav-i{justify-content:center;padding:.7rem;width:3.2rem}
+[data-navx=rail] .nav-i.on::before{left:-.5rem}
+[data-navx=rail] #me{padding:.3rem;background:none}
+[data-navx=bottom] #home{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto}
+[data-navx=bottom] #main{order:1}
+[data-navx=bottom] #side{order:2;flex-direction:row;border-right:0;border-top:1px solid var(--line);padding:.3rem .4rem;gap:.1rem;overflow-x:auto;scrollbar-width:none;align-items:stretch}
+[data-navx=bottom] #side::-webkit-scrollbar{display:none}
+[data-navx=bottom] .brand,[data-navx=bottom] .side-sp,[data-navx=bottom] #me,[data-navx=bottom] #badge,[data-navx=bottom] .nav-i kbd,[data-navx=bottom] .nav-sec{display:none}
+[data-navx=bottom] .nav-i{flex-direction:column;gap:.15rem;font-size:.66rem;padding:.4rem .2rem;flex:1 0 4.3rem;align-items:center;justify-content:center;min-height:3.1rem}
+[data-navx=bottom] .nav-i.on::before{display:none}
+[data-navx=bottom] .nav-i.on{background:none;color:var(--accent)}
+[data-navx=bottom] .nav-i.on svg{filter:drop-shadow(0 0 .4rem var(--accent))}
+[data-navx=bottom] #meTop{display:grid}
+[data-navx=bottom] #top{padding:.6rem .9rem .2rem}
+[data-navx=bottom] #search{flex:1}
+[data-navx=bottom] #content{padding:.4rem .9rem 1.5rem}
+[data-navx=bottom] #hints{display:none}
+@media (orientation:landscape) and (max-height:480px){[data-navx=rail] #home{grid-template-columns:4.2rem minmax(0,1fr)}}
+
+/* ---------- page header and view switcher ---------- */
+.ph{display:flex;align-items:center;justify-content:space-between;gap:.8rem;flex-wrap:wrap;margin:.2rem 0 .6rem}
+.ph .page-h{margin:.2rem 0}
+.phr{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.vseg{display:flex;gap:.15rem;background:var(--panel);border-radius:.7rem;padding:.2rem}
+.vseg button{width:2.4rem;height:2.2rem;border:0;background:none;color:var(--dim);border-radius:.5rem;display:grid;place-items:center}
+.vseg button.on{background:var(--accent);color:var(--on-accent)}
+.sortb{min-height:2.4rem}
+.subl{color:var(--dim);font-size:.85rem;margin:-.4rem 0 .9rem}
+.hello{margin-bottom:.6rem}
+
+/* ---------- list and tile views ---------- */
+.plist{display:flex;flex-direction:column;gap:.35rem;padding:.2rem .1rem}
+.lrow{display:flex;flex-direction:row;align-items:center;gap:.8rem;width:100%;background:var(--panel);border-radius:.8rem;padding:.5rem .6rem;min-height:3.6rem;text-align:left;border:0;color:inherit;position:relative}
+.lrow .th{width:2.8rem;height:2.8rem;border-radius:.6rem;background:linear-gradient(165deg,var(--c),#000 170%);display:grid;place-items:center;font-size:1.5rem;flex:none}
+.li-t{display:flex;flex-direction:column;min-width:0;flex:1}
+.li-t b{font-size:.95rem}
+.li-t small{color:var(--dim);font-size:.75rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.li-m{color:var(--dim);font-size:.75rem;white-space:nowrap}
+.lrow .fav,.tile .fav{width:2.2rem;height:2.2rem;display:grid;place-items:center;color:var(--dim);font-size:1.05rem;flex:none}
+.lrow .fav.on,.tile .fav.on{color:#ffd75c}
+.lrow .more,.tile .more{width:2rem;height:2.2rem;display:grid;place-items:center;color:var(--dim);font-size:1.2rem;font-weight:900;flex:none}
+.card.lrow.fx,.card.tile.fx{background:var(--panel2)}
+.ptiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(17rem,1fr));gap:.7rem;padding:.2rem .1rem}
+.tile{display:flex;flex-direction:row;align-items:center;gap:.9rem;width:auto;background:radial-gradient(circle at 18% 30%,rgba(255,255,255,.22),transparent 55%),linear-gradient(120deg,var(--c),#000 190%);border-radius:1rem;padding:.8rem .8rem .8rem 1rem;min-height:6.2rem;border:0;color:#fff;text-align:left;position:relative;overflow:hidden}
+.tart{font-size:3rem;line-height:1;filter:drop-shadow(0 .25rem .35rem rgba(0,0,0,.4));flex:none}
+.tt{display:flex;flex-direction:column;gap:.15rem;min-width:0;flex:1}
+.tt b{font-size:1.05rem;text-shadow:0 1px 3px rgba(0,0,0,.4)}
+.tt small{font-size:.74rem;opacity:.85;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.tt em{font-style:normal;font-size:.7rem;font-weight:700;opacity:.8}
+.tile .fav,.tile .more{color:#fff;opacity:.85}
+.tile .fav.on{color:#ffd75c;opacity:1}
+
+/* ---------- home ---------- */
+.cont{display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap;border-radius:1.1rem;padding:1.2rem 1.4rem;background:radial-gradient(circle at 12% 30%,rgba(255,255,255,.25),transparent 50%),linear-gradient(120deg,var(--c),#000 170%);color:#fff;margin:.2rem 0 .9rem}
+.cart{font-size:4.2rem;line-height:1;filter:drop-shadow(0 .4rem .6rem rgba(0,0,0,.4))}
+.ct{flex:1;min-width:11rem}
+.ct small{font-weight:800;font-size:.72rem;opacity:.85;background:rgba(0,0,0,.3);border-radius:999px;padding:.2rem .6rem}
+.ct h2{font-size:1.7rem;font-weight:900;letter-spacing:-.03em;margin:.45rem 0 .15rem;text-shadow:0 1px 4px rgba(0,0,0,.35)}
+.ct p{font-size:.85rem;opacity:.9}
+.cont .btns{display:flex;gap:.5rem}
+
+/* ---------- settings extras ---------- */
+.row.stack{flex-direction:column;align-items:stretch;gap:.6rem}
+.thgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(5.6rem,1fr));gap:.5rem}
+.thm{border:.18rem solid transparent;border-radius:.7rem;background:var(--tb);color:var(--tt);display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:2rem auto;gap:.25rem;padding:.4rem;font-size:.72rem;font-weight:700;position:relative}
+.thm i{border-radius:.3rem;background:var(--tp);outline:1px solid rgba(127,127,127,.25)}
+.thm i.c{background:var(--accent)}
+.thm span{grid-column:1/-1;text-align:left;padding:0 .1rem}
+.thm.on{border-color:var(--accent)}
+.row.bind{align-items:center}
+.row.bind .rl{display:flex;flex-direction:column}
+.row.bind small{font-size:.72rem;color:var(--dim);font-weight:500}
+.bchips{display:flex;gap:.4rem;flex-wrap:wrap;justify-content:flex-end}
+.chip-b{background:var(--bg);border:0;border-radius:.5rem;padding:.45rem .8rem;font-size:.8rem;font-weight:700;min-height:2.3rem;min-width:7rem}
+.chip-b.wait{background:var(--accent);color:var(--on-accent);animation:blink 1s infinite}
+@keyframes blink{50%{opacity:.6}}
+.btnrow{display:flex;gap:.6rem;margin:1rem 0}
+.padtest{display:flex;flex-wrap:wrap;gap:.4rem;background:var(--panel);border-radius:.9rem;padding:.7rem}
+.pt{min-width:3rem;text-align:center;padding:.45rem .7rem;border-radius:.5rem;background:var(--bg);font-weight:800;font-size:.8rem;color:var(--dim);transition:background .05s}
+.pt.lit{background:var(--accent);color:var(--on-accent)}
+.pt.stick,.pt.status{font-weight:600;font-variant-numeric:tabular-nums}
+.pt.status{flex:1;text-align:left;background:none}
+
+/* ---------- corners ---------- */
+[data-radius=soft] .poster,[data-radius=soft] .hero-main,[data-radius=soft] .d-banner,[data-radius=soft] .cont,[data-radius=soft] .tile,[data-radius=soft] .lrow,[data-radius=soft] .row,[data-radius=soft] .d-side,[data-radius=soft] .totals div,[data-radius=soft] .troph,[data-radius=soft] .dlg,[data-radius=soft] .stat,[data-radius=soft] .gbtn,[data-radius=soft] canvas,[data-radius=soft] .padtest{border-radius:.4rem}
+[data-radius=soft] .btn,[data-radius=soft] .tabbtn,[data-radius=soft] #search,[data-radius=soft] #backBtn,[data-radius=soft] .chip,[data-radius=soft] .vseg,[data-radius=soft] .seg,[data-radius=soft] .nav-i,[data-radius=soft] #me,[data-radius=soft] .hero-li,[data-radius=soft] .sg button,[data-radius=soft] .seg button,[data-radius=soft] .vseg button{border-radius:.35rem}
+[data-radius=sharp] .poster,[data-radius=sharp] .hero-main,[data-radius=sharp] .d-banner,[data-radius=sharp] .cont,[data-radius=sharp] .tile,[data-radius=sharp] .lrow,[data-radius=sharp] .row,[data-radius=sharp] .d-side,[data-radius=sharp] .totals div,[data-radius=sharp] .troph,[data-radius=sharp] .dlg,[data-radius=sharp] .stat,[data-radius=sharp] .gbtn,[data-radius=sharp] canvas,[data-radius=sharp] #over,[data-radius=sharp] .padtest,[data-radius=sharp] .thm,[data-radius=sharp] .btn,[data-radius=sharp] .tabbtn,[data-radius=sharp] #search,[data-radius=sharp] #backBtn,[data-radius=sharp] .chip,[data-radius=sharp] .vseg,[data-radius=sharp] .seg,[data-radius=sharp] .nav-i,[data-radius=sharp] #me,[data-radius=sharp] .hero-li,[data-radius=sharp] .sg button,[data-radius=sharp] .seg button,[data-radius=sharp] .vseg button,[data-radius=sharp] .lrow .th,[data-radius=sharp] .hero-li .th,[data-radius=sharp] .chip-b,[data-radius=sharp] .pt{border-radius:0}
+[data-radius=sharp] #toast{border-radius:0}
+
+/* ---------- backgrounds ---------- */
+[data-bg=gradient] #main{background:linear-gradient(160deg,transparent 35%,color-mix(in srgb,var(--accent) 16%,transparent))}
+[data-bg=glow] #main{background:radial-gradient(60rem 28rem at 85% -12%,color-mix(in srgb,var(--accent) 26%,transparent),transparent 70%)}
+[data-bg=pattern] #main{background-image:radial-gradient(var(--line) 1px,transparent 1.6px);background-size:20px 20px}
+
+/* ---------- game frame ---------- */
+[data-frame=none] canvas{box-shadow:none}
+[data-frame=glow] canvas{box-shadow:0 0 0 .18rem var(--accent),0 0 2.2rem color-mix(in srgb,var(--accent) 55%,transparent)}
+
+/* ---------- on-screen controls: side ---------- */
+[data-tph=left] .tp-dpad{left:auto;right:calc(1rem + env(safe-area-inset-right))}
+[data-tph=left] .tp-btns{right:auto;left:calc(1rem + env(safe-area-inset-left))}
+
+/* fixes */
+.thgrid{align-items:start}
+.thm{align-content:start;grid-template-rows:2rem auto;height:auto}
+.padtest{align-items:center}
+.pt.status{flex:1 1 100%}
+@media (max-width:540px){.li-m{display:none}.ptiles{grid-template-columns:1fr}}
+
+/* ---------- slim and minimal bars while playing (landscape: narrower side panels, portrait: the top strip from app.css) ---------- */
+@media (orientation:landscape){
+  [data-gbars=slim] #game{gap:.5rem;padding:.35rem .5rem}
+  [data-gbars=slim] .gside{width:clamp(6.8rem,14vw,8.6rem);gap:.4rem}
+  [data-gbars=slim] .gside .gbtn{padding:.45rem .55rem;min-height:2.3rem;font-size:.8rem}
+  [data-gbars=slim] #gname{font-size:.95rem}
+  [data-gbars=slim] .stat{padding:.35rem .6rem}
+  [data-gbars=slim] .stat b{font-size:1.35rem}
+  [data-gbars=slim] #controls{gap:.4rem;font-size:.66rem}
+  [data-gbars=slim] #controls li{flex-wrap:wrap;gap:.2rem .35rem}
+  [data-gbars=slim] .gside h3{display:none}
+  [data-gbars=min] #game{gap:.35rem;padding:.25rem .4rem}
+  [data-gbars=min] .gside.left{width:5.8rem;gap:.35rem}
+  [data-gbars=min] .gside.right,[data-gbars=min] #gname{display:none}
+  [data-gbars=min] .gbtn{padding:.35rem .5rem;min-height:2.1rem;font-size:.74rem}
+  [data-gbars=min] .stat{padding:.25rem .5rem}
+  [data-gbars=min] .stat b{font-size:1.15rem}
+  [data-gbars=min] .tp-on .gside.left{display:flex}
+}
+@media (orientation:portrait){
+  [data-gbars=min] #game{gap:.15rem;padding:.2rem .4rem}
+  [data-gbars=min] .gside.left{height:2.3rem}
+  [data-gbars=min] .gside.left .gbtn{min-height:2rem;padding:.2rem .55rem;font-size:.74rem}
+  [data-gbars=min] .stat{padding:.1rem .5rem}
+  [data-gbars=min] .stat b{font-size:1rem}
+  [data-gbars=min] canvas{--avail:calc(100dvh - 3.4rem)}
+}
+
+/* ---------- My Games player ---------- */
+#webgame{position:fixed;inset:0;z-index:30;background:#000;display:flex;flex-direction:column}
+#webgame iframe{flex:1;border:0;width:100%;background:#fff}
+.wbar{position:absolute;left:0;right:0;top:0;display:flex;align-items:center;gap:.8rem;padding:calc(.4rem + env(safe-area-inset-top)) .6rem .4rem;background:linear-gradient(rgba(0,0,0,.75),transparent);color:#fff;z-index:2;transition:opacity .4s;pointer-events:none}
+.wbar .gbtn{pointer-events:auto;background:rgba(20,24,50,.85);min-height:2.3rem;padding:.35rem .8rem;font-size:.82rem}
+.wbar.fade{opacity:0}.wbar.fade:hover,.wbar:active{opacity:1}
+.wbar b{font-size:.9rem;text-shadow:0 1px 3px #000}

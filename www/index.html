@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en" data-input="touch">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#121214">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<title>Pocket Arcade</title>
+<link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="css/extra.css">
+</head>
+<body>
+<div id="splash" aria-hidden="true"><svg viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="var(--accent)"/><path d="M11 9h3v5h5v3h-5v6h-3v-6H6v-3h5z" fill="#fff" opacity=".95" transform="translate(1 -1) scale(.85)"/><circle cx="23.5" cy="21" r="2.6" fill="#fff"/><circle cx="19" cy="24.5" r="1.6" fill="#fff" opacity=".7"/></svg><b>Pocket Arcade</b></div>
+<div id="app">
+  <div id="home">
+    <nav id="side" aria-label="Sections">
+      <div class="brand">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#0078f2"/><path d="M11 9h3v5h5v3h-5v6h-3v-6H6v-3h5z" fill="#fff" opacity=".95" transform="translate(1 -1) scale(.85)"/><circle cx="23.5" cy="21" r="2.6" fill="#fff"/><circle cx="19" cy="24.5" r="1.6" fill="#fff" opacity=".7"/></svg>
+        <b>Pocket<br>Arcade</b>
+      </div>
+      <div id="navList" style="display:contents"></div>
+      <div class="side-sp"></div>
+      <button id="me" data-f data-k="me" aria-label="Your progress"><span id="meAv">🎮</span><span><b id="meName">Player</b><small id="meSub"></small></span></button>
+      <div id="badge"></div>
+    </nav>
+    <div id="main">
+      <header id="top">
+        <button id="backBtn"></button>
+        <label id="search" data-f data-k="search"><input id="q" type="search" placeholder="Search games" autocomplete="off" enterkeyhint="search" aria-label="Search games"></label>
+        <span class="sp"></span>
+        <button id="meTop" data-f data-k="meTop" aria-label="Your progress">🎮</button>
+      </header>
+      <div id="content"></div>
+      <div id="hints"></div>
+    </div>
+  </div>
+
+  <section id="game">
+    <aside class="gside left">
+      <button class="gbtn" id="back">&larr; Library <kbd>B</kbd></button>
+      <div id="gname"></div>
+      <button class="gbtn" id="lvl"></button>
+      <button class="gbtn" id="undoBtn" style="display:none">&#8630; Undo <kbd>Select</kbd></button>
+      <div class="stat"><span>Score</span><b id="hud">0</b></div>
+      <div class="stat"><span>Best</span><b id="best">0</b></div>
+    </aside>
+    <div class="wrap">
+      <canvas id="c" width="1080" height="1620"></canvas>
+      <div id="over">
+        <h2 id="overTitle">Round over</h2>
+        <p id="res"></p>
+        <div class="row2">
+          <button class="btn pri" id="again">Play again <kbd>A</kbd></button>
+          <button class="btn" id="tomenu">Library <kbd>B</kbd></button>
+        </div>
+      </div>
+    </div>
+    <div id="tpad" aria-label="On-screen controls"></div>
+    <div id="fps"></div>
+    <aside class="gside right" id="ctl">
+      <h3>Controls</h3>
+      <ul id="controls"></ul>
+    </aside>
+  </section>
+  <div id="modal"></div>
+  <div id="toast" role="status"></div>
+</div>
+<script src="js/catalog.js"></script>
+<script src="js/core.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/input.js"></script>
+<script src="js/registry.js"></script>
+<script src="js/touchpad.js"></script>
+<script src="js/ui/base.js"></script>
+<script src="js/ui/nav.js"></script>
+<script src="js/ui/cards.js"></script>
+<script src="js/ui/store.js"></script>
+<script src="js/ui/library.js"></script>
+<script src="js/ui/detail.js"></script>
+<script src="js/ui/home.js"></script>
+<script src="js/ui/progress.js"></script>
+<script src="js/ui/controls.js"></script>
+<script src="js/ui/mine.js"></script>
+<script src="js/ui/settings.js"></script>
+<script src="js/boot.js"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "appId": "com.pocketarcade.app",
+  "appName": "Pocket Arcade",
+  "webDir": "www",
+  "backgroundColor": "#1b1d24",
+  "android": { "allowMixedContent": false },
+  "plugins": {
+    "StatusBar": { "overlaysWebView": true, "style": "DARK", "backgroundColor": "#1b1d24" }
+  }
+}

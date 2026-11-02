@@ -1,0 +1,22 @@
+{
+  "name": "pocket-arcade",
+  "version": "3.2.0",
+  "private": true,
+  "description": "Pocket Arcade - 31 offline games, saves, settings, controller support.",
+  "scripts": {
+    "setup": "npm install && npx cap add android && node tools/apply-native.js && npx cap sync android",
+    "update": "node tools/apply-native.js && npx cap sync android",
+    "open": "npx cap open android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.0.0",
+    "@capacitor/app": "^6.0.0",
+    "@capacitor/cli": "^6.0.0",
+    "@capacitor/core": "^6.0.0",
+    "@capacitor/haptics": "^6.0.0",
+    "@capacitor/preferences": "^6.0.0",
+    "@capacitor/screen-orientation": "^6.0.0",
+    "@capacitor/share": "^6.0.0",
+    "@capacitor/status-bar": "^6.0.0"
+  }
+}
